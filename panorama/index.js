@@ -59,8 +59,8 @@
 
 			panoramit.generate({
 				inputPaths: this.files,
-				outputFile: path.join(__dirname, 'out', 'out.tif'),
-				tempDir: path.join(__dirname, 'tmp'),
+				outputFile: '/var/www/openrov/photos/out.tif',
+				tempDir: '/tmp',
 
 				debug: false // optional value in case you want to debug the individual panorama commands
 			}, function(err, outputPath) {
