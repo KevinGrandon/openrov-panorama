@@ -26,36 +26,23 @@
 		listen: function(deps) {
 			deps.io.sockets.on('connection', function(socket) {
 				console.log('Panorama:connection');
-				socket.on('panoramastart', this.start.bind(this, deps));
-				socket.on('panoramastop', this.stop.bind(this, deps));
+				socket.on('panoramasnapshot', this.snapshot.bind(this, deps));
+				socket.on('panoramacapture', this.generate.bind(this, deps));
 			}.bind(this));
 		},
 
-		start: function(deps) {
+		snapshot: function(deps) {
 			console.log('Panorama:start');
-			this.isCapturing = true;
 
-			function takePicture() {
-				deps.rov.camera.snapshot(function(filename) {
-					console.log('Photo taken: ' + filename);
-					this.files.push(filename);
-					deps.io.sockets.emit('photo-added', '/photos/' + path.basename(filename));
-				}.bind(this));
-
-				this.captureTimeout = setTimeout(takePicture.bind(this), 5000);
-			}
-
-			takePicture.call(this);
-		},
-
-		stop: function(deps) {
-			console.log('Panorama:stop');
-			this.isCapturing = false;
-			clearTimeout(this.captureTimeout);
-			this.generate(deps);
+			deps.rov.camera.snapshot(function(filename) {
+				console.log('Photo taken: ' + filename);
+				this.files.push(filename);
+				deps.io.sockets.emit('photo-added', '/photos/' + path.basename(filename));
+			}.bind(this));
 		},
 
 		generate: function(deps) {
+			console.log('Panorama:generate');
 
 			panoramit.generate({
 				inputPaths: this.files,

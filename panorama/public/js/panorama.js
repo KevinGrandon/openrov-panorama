@@ -32,13 +32,20 @@
 
 		handleStartButton: function() {
 			this.isCapturing = true;
-			this.cockpit.socket.emit('panoramastart');
 			console.log('send panorama start request to server');
 			this.toggleButtons();
+
+			function takePicture() {
+				this.cockpit.socket.emit('panoramasnapshot');
+				this.takePictureTimeout = setTimeout(takePicture.bind(this), 5000)
+			}
+
+			takePicture.call(this);
 		},
 
 		handleStopButton: function() {
 			this.isCapturing = false;
+			clearTimeout(this.takePictureTimeout);
 			this.cockpit.socket.emit('panoramacapture');
 			console.log('send panorama capture request to server');
 			this.toggleButtons();
