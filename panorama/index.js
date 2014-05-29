@@ -58,8 +58,7 @@
 		generate: function(deps) {
 
 			panoramit.generate({
-				inputDir: path.join('/photos/'), // TODO
-				inputExt: 'jpg',
+				inputPaths: this.files,
 				outputFile: path.join(__dirname, 'out', 'out.jpg'),
 				tempDir: path.join(__dirname, 'tmp'),
 

@@ -8,7 +8,7 @@
     "url": "git://github.com/KevinGrandon/openrov-panorama.git"
   },
   "dependencies": {
-    "panoramit": "*"
+    "panoramit": "~0.0.3"
   },
   "engines": {
     "node": ">= 0.10.15"
