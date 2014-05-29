@@ -1,0 +1,16 @@
+{
+  "name": "OpenROV-Panorama",
+  "author": "Kevin Grandon",
+  "description": "Panorama plugin for OpenROV.",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/KevinGrandon/openrov-panorama.git"
+  },
+  "dependencies": {
+    "panoramit": "*"
+  },
+  "engines": {
+    "node": ">= 0.10.15"
+  }
+}
