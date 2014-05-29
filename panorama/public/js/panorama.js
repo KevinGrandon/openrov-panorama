@@ -45,11 +45,11 @@
 		},
 
 		handlePhotoAdded: function(filename) {
-			console.log('got new photos', filename);
+			console.log('received photo-added message ', filename);
 		},
 
 		handlePhotoStitched: function(filename) {
-			console.log('got a stitched photo', filename);
+			console.log('received photo-stitched message', filename);
 		}
 	};
 

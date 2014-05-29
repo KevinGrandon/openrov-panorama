@@ -64,12 +64,11 @@
 
 				debug: false // optional value in case you want to debug the individual panorama commands
 			}, function(err, outputPath) {
-				// output path is passed through for convenience on success
-			});
+				// Call this after generating to let the UI know that we are ready.
+				deps.io.sockets.emit('photo-stitched', outputPath);
+				this.files = [];
+			}.bind(this));
 
-			// Call this after generating to let the UI know that we are ready.
-			deps.io.sockets.emit('photo-stitched', 'some filename');
-			this.files = [];
 		}
 	};
 
