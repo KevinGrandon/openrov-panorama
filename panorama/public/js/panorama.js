@@ -49,6 +49,7 @@
 			this.cockpit.socket.emit('panoramacapture');
 			console.log('send panorama capture request to server');
 			this.toggleButtons();
+			this.startButton.html('Generating Panorama...').prop('disabled', true);
 		},
 
 		handlePhotoAdded: function(filename) {
@@ -57,6 +58,7 @@
 
 		handlePhotoStitched: function(filename) {
 			console.log('received photo-stitched message', filename);
+			this.startButton.html('Start Panorama').prop('disabled', false);
 		}
 	};
 
