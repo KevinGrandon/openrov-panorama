@@ -25,6 +25,8 @@
 
 	Panorama.prototype = {
 
+		files: [],
+
 		toggleButtons: function() {
 			this.startButton.toggle();
 			this.stopButton.toggle();
@@ -37,7 +39,7 @@
 
 			function takePicture() {
 				this.cockpit.socket.emit('panoramasnapshot');
-				this.takePictureTimeout = setTimeout(takePicture.bind(this), 5000)
+				this.takePictureTimeout = setTimeout(takePicture.bind(this), 5000);
 			}
 
 			takePicture.call(this);
@@ -49,10 +51,22 @@
 			this.cockpit.socket.emit('panoramacapture');
 			console.log('send panorama capture request to server');
 			this.toggleButtons();
+
+			var url = 'http://localhost:8080/?files=' + this.files.join('&files=')
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function(o) {
+				console.log('GOT LOAD', o.responseText);
+			};
+
+			xhr.open('GET', url, true);
+			xhr.send();
+
+			this.files = [];
 		},
 
 		handlePhotoAdded: function(filename) {
 			console.log('received photo-added message ', filename);
+			this.files.push(filename);
 		},
 
 		handlePhotoStitched: function(filename) {

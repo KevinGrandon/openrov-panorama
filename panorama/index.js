@@ -32,7 +32,7 @@
 		},
 
 		snapshot: function(deps) {
-			console.log('Panorama:start');
+			console.log('Panorama:snapshot');
 
 			deps.rov.camera.snapshot(function(filename) {
 				console.log('Photo taken: ' + filename);
@@ -43,6 +43,8 @@
 
 		generate: function(deps) {
 			console.log('Panorama:generate');
+
+			return;
 
 			panoramit.generate({
 				inputPaths: this.files,
